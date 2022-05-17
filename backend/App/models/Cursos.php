@@ -39,7 +39,7 @@ sql;
       INNER JOIN asigna_curso ac ON (re.id_registrado = ac.id_registrado)
      INNER JOIN cursos cu ON (cu.id_curso = ac.id_curso)
      LEFT JOIN progresos_cursos pc ON (pc.id_registrado = ac.id_registrado)
-      WHERE re.clave = '$clave'
+      WHERE re.clave = '$clave' GROUP BY pc.id_progreso_curso;
 sql;
       return $mysqli->queryAll($query);
       
