@@ -37,8 +37,8 @@ sql;
       SELECT re.codigo_beca,re.nombre, re.apellidop, re.apellidom, ac.id_asigna_curso, ac.id_curso, ac.id_registrado, cu.nombre as nombre_curso, cu.horario_transmision, cu.fecha_curso, cu.duracion, pc.*
       FROM registrados re 
       INNER JOIN asigna_curso ac ON (re.id_registrado = ac.id_registrado)
-      INNER JOIN cursos cu ON (cu.id_curso = ac.id_curso)
-      LEFT JOIN progresos_cursos pc ON (pc.id_curso = ac.id_curso)
+     INNER JOIN cursos cu ON (cu.id_curso = ac.id_curso)
+     LEFT JOIN progresos_cursos pc ON (pc.id_registrado = ac.id_registrado)
       WHERE re.clave = '$clave'
 sql;
       return $mysqli->queryAll($query);
