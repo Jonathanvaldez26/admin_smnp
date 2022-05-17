@@ -475,7 +475,7 @@
 
                             <div class="form-group col-md-12">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_registrado">Usuario <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="id_registrado" id="id_registrado" required>
+                                <select class="multisteps-form__select form-control all_input_select select_2" name="id_registrado" id="id_registrado" required>
                                     <option value="" selected>Selecciona una Opción</option>
                                     <?= $optionUsers ?>
                                 </select>
@@ -516,6 +516,7 @@
 
 <script>
     $(document).ready(function() {
+        $('.select_2').select2();
 
         $("#form_etiquetas").on("click", function(event) {
             event.preventDefault();
@@ -922,6 +923,7 @@
 
         });
 
+        // $('#id_registrado').on("change", "select.select_2", function(event) {
         $("#id_registrado").on("change", function() {
             var id_registrado = $(this).val();
             $.ajax({
@@ -940,7 +942,7 @@
 
                 },
                 success: function(respuesta) {
-                    // console.log(respuesta);
+                    console.log(respuesta);
 
                     $('#id_curso_u').removeAttr('disabled');
 
