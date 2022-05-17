@@ -45,6 +45,15 @@ sql;
       
     }
 
+    public static function getCongresoByUser($clave){       
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT * FROM registrados  WHERE id_registrado = '$clave' 
+sql;
+      return $mysqli->queryAll($query);
+      
+    }
+
 
     public static function getAllUsers(){       
       $mysqli = Database::getInstance();
@@ -189,6 +198,28 @@ sql;
         ':duracion'=>$data->_duracion,
         ':descripcion' =>$data->_descripcion,
         ':id_curso' => $data->_id_curso
+      );
+
+      // var_dump($parametros);
+      // var_dump($query);
+      // exit;
+        // $accion = new \stdClass();
+        // $accion->_sql= $query;
+        // $accion->_parametros = $parametros;
+        // $accion->_id = $hotel->_id_hotel;
+        return $mysqli->update($query, $parametros);
+        
+    }
+
+    public static function updateCongreso($data){
+      $mysqli = Database::getInstance(true);
+
+      $query=<<<sql
+      UPDATE registrados SET congreso = 1  WHERE id_registrado = :id_registrado
+sql;
+    
+      $parametros = array(
+        ':id_registrado' => $data->_id_registrado
       );
 
       // var_dump($parametros);

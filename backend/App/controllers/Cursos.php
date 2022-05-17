@@ -135,15 +135,33 @@ html;
     $id_curso = MasterDom::getData('id_curso');
     $id_registrado = MasterDom::getData('id_registrado');
 
-    $data->_id_curso = $id_curso;
-    $data->_id_registrado = $id_registrado;
 
-    $id = CursosDao::insertAsignaCurso($data);
-    if ($id) {
-      echo 'success';
-    } else {
-      echo 'fail';
+    
+
+    if($id_curso == 100){
+      // $data->_id_curso = $id_curso;
+      $data->_id_registrado = $id_registrado;
+      
+      $id = CursosDao::updateCongreso($data);
+        if ($id) {
+          echo 'success';
+        } else {
+          echo 'fail';
+        }
+
+    }else{
+      $data->_id_curso = $id_curso;
+      $data->_id_registrado = $id_registrado;
+  
+      $id = CursosDao::insertAsignaCurso($data);
+      if ($id) {
+        echo 'success';
+      } else {
+        echo 'fail';
+      }
     }
+
+   
   }
 
   public function deleteCourseUser()
@@ -167,7 +185,14 @@ html;
     if (isset($id_user)) {
       $Cursos = CursosDao::getCoursesNotSelectByUser($id_user);
 
-      echo json_encode($Cursos);
+      $getCongreso = CursosDao::getCongresoByUser($id_user)[0];
+
+      $data = [
+        "cursos" => $Cursos,
+        "status_congreso" => $getCongreso['congreso']
+      ];
+
+      echo json_encode($data);
     }
   }
 

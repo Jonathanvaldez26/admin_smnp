@@ -952,7 +952,7 @@
                             })
                             .text('Selecciona una opción'));
 
-                    $.each(respuesta, function(key, value) {
+                    $.each(respuesta.cursos, function(key, value) {
                         //console.log(key);
                         console.log(value);
                         $('#id_curso_u')
@@ -962,6 +962,15 @@
                                 .text(value.nombre));
                     });
 
+                    if(respuesta.status_congreso == 0){
+                        
+                        $('#id_curso_u')
+                                .append($('<option>', {
+                                        value: '100'
+                                    })
+                                    .text('Congreso'));
+
+                    }
                 },
                 error: function(respuesta) {
                     console.log(respuesta);
